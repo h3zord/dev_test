@@ -33,13 +33,9 @@ const initializeDatabase = async () => {
 
 initializeDatabase()
 
-app.post('/users', async (req, res) => {
-  // Crie o endpoint de users
-})
+app.post('/users', async (req, res) => {})
 
-app.post('/posts', async (req, res) => {
-  // Crie o endpoint de posts
-})
+app.post('/posts', async (req, res) => {})
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
