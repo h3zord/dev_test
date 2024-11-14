@@ -5,7 +5,8 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "ts-node-dev --respawn src/index.ts",
-    "test": "ts-node src/db.test.ts"
+    "test": "ts-node src/db.test.ts",
+    "test:unit": "vitest run --dir src/use-cases"
   },
   "dependencies": {
     "axios": "^1.5.0",
