@@ -1,4 +1,4 @@
-import { UsersInMemoryRepository } from '../repositories/in-memory/user-in-memory-repository'
+import { UsersInMemoryRepository } from '../repositories/in-memory/users-in-memory-repository'
 import { expect, describe, it, beforeEach } from 'vitest'
 import { UpdateUserUseCase } from './update-user'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'

@@ -28,6 +28,6 @@ export class User {
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date
 
-  @OneToMany(() => Post, (post) => post.user)
+  @OneToMany(() => Post, (post) => post.user, { cascade: true })
   posts: Post[]
 }

@@ -10,7 +10,7 @@ import {
 
 @Entity('posts')
 export class Post {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'int' })
   id: number
 
   @Column({ type: 'varchar', length: 100, nullable: false })
@@ -25,6 +25,6 @@ export class Post {
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date
 
-  @ManyToOne(() => User, (user) => user.id, { nullable: false })
+  @ManyToOne(() => User, (user) => user.posts, { nullable: false })
   user: User
 }
