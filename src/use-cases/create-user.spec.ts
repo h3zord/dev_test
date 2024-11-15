@@ -5,13 +5,13 @@ import { CreateUserUseCase } from './create-user'
 let usersRepository: UsersInMemoryRepository
 let sut: CreateUserUseCase
 
-describe('Create user Use Case', () => {
+describe('Create user use case', () => {
   beforeEach(() => {
     usersRepository = new UsersInMemoryRepository()
     sut = new CreateUserUseCase(usersRepository)
   })
 
-  it('should to create an user', async () => {
+  it('should be able to create a new user', async () => {
     const { user } = await sut.execute({
       firstName: 'John',
       lastName: 'Doe',
@@ -19,5 +19,6 @@ describe('Create user Use Case', () => {
     })
 
     expect(user.id).toEqual(expect.any(Number))
+    expect(user.email).toEqual('test@test.com')
   })
 })

@@ -10,7 +10,7 @@ import {
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'int' })
   id: number
 
   @Column({ type: 'varchar', length: 100, nullable: false })
