@@ -35,7 +35,20 @@ export class PostsInMemoryRepository implements PostsRepository {
     return posts
   }
 
-  // async update(id: number, data: Partial<User>) {}
+  async update(id: number, data: Partial<Post>) {
+    const postIndex = this.items.findIndex((item) => item.id === id)
+
+    const post = this.items[postIndex]
+
+    this.items[postIndex] = {
+      ...post,
+      title: data.title ?? post.title,
+      description: data.description ?? post.description,
+      updatedAt: new Date(),
+    }
+
+    return this.items[postIndex]
+  }
 
   // async delete(id: number) {}
 }
