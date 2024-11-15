@@ -29,7 +29,11 @@ export class PostsInMemoryRepository implements PostsRepository {
     return post
   }
 
-  // async findByEmail(email: string) {}
+  async findManyByUserId(userId: number) {
+    const posts = this.items.filter((item) => item.user.id === userId)
+
+    return posts
+  }
 
   // async update(id: number, data: Partial<User>) {}
 
