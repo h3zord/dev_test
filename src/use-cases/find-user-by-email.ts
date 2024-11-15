@@ -2,21 +2,21 @@ import { User } from '../entity/User'
 import { UsersRepository } from '../repositories/contracts/users-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
-interface FindUserByIdUseCaseRequest {
-  id: number
+interface FindUserByEmailUseCaseRequest {
+  email: string
 }
 
-interface FindUserByIdUseCaseResponse {
+interface FindUserByEmailUseCaseResponse {
   user: User
 }
 
-export class FindUserByIdUseCase {
+export class FindUserByEmailUseCase {
   constructor(private usersRepository: UsersRepository) {}
 
   async execute({
-    id,
-  }: FindUserByIdUseCaseRequest): Promise<FindUserByIdUseCaseResponse> {
-    const user = await this.usersRepository.findById(id)
+    email,
+  }: FindUserByEmailUseCaseRequest): Promise<FindUserByEmailUseCaseResponse> {
+    const user = await this.usersRepository.findByEmail(email)
 
     if (!user) {
       throw new ResourceNotFoundError()

@@ -11,7 +11,7 @@ export interface CreateUser {
 
 export interface UsersRepository {
   create(data: CreateUser): Promise<User>
-  findById(id: number): Promise<User | null>
-  // findByEmail(email: string): Promise<User | null>
-  // delete(id: number): Promise<null>
+  findByEmail(email: string): Promise<User | null>
+  update(id: number, data: Partial<User>): Promise<User | null>
+  // delete(id: number): Promise<void | null>
 }
