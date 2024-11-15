@@ -19,7 +19,15 @@ export class PostsInMemoryRepository implements PostsRepository {
     return post
   }
 
-  // async findById(id: number) {}
+  async findById(id: number) {
+    const post = this.items.find((item) => item.id === id)
+
+    if (!post) {
+      return null
+    }
+
+    return post
+  }
 
   // async findByEmail(email: string) {}
 

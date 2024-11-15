@@ -24,19 +24,19 @@ describe('Create post use case', () => {
 
   it('should be able to create a new post', async () => {
     const { post } = await sut.execute({
-      title: 'Void content',
+      title: 'Void title',
       description: 'Void description',
       userId: 1,
     })
 
     expect(post.id).toEqual(expect.any(Number))
-    expect(post.title).toEqual('Void content')
+    expect(post.title).toEqual('Void title')
   })
 
   it('should throw an error when user do not exist', async () => {
     await expect(() =>
       sut.execute({
-        title: 'Void content',
+        title: 'Void title',
         description: 'Void description',
         userId: 2,
       }),

@@ -22,6 +22,7 @@ describe('Find user by id use case', () => {
   it('should be able to find an user by id', async () => {
     const { user } = await sut.execute({ id: 1 })
 
+    expect(user.id).toEqual(1)
     expect(user.firstName).toEqual('John')
     expect(user.lastName).toEqual('Doe')
   })

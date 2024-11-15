@@ -11,7 +11,7 @@ export interface CreatePost {
 
 export interface PostsRepository {
   create(data: CreatePost): Promise<Post>
-  // findById(id: number): Promise<Post | null>
+  findById(id: number): Promise<Post | null>
   // update(id: number, data: Partial<Post>): Promise<Post>
   // delete(id: number): Promise<void>
 }
