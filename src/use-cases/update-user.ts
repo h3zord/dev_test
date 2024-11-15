@@ -22,18 +22,20 @@ export class UpdateUserUseCase {
     lastName,
     email,
   }: UpdateUserUseCaseRequest): Promise<UpdateUserUseCaseResponse> {
-    const user = await this.usersRepository.update(id, {
-      firstName,
-      lastName,
-      email,
-    })
+    const user = await this.usersRepository.findById(id)
 
     if (!user) {
       throw new ResourceNotFoundError()
     }
 
+    const updatedUser = await this.usersRepository.update(id, {
+      firstName,
+      lastName,
+      email,
+    })
+
     return {
-      user,
+      user: updatedUser,
     }
   }
 }

@@ -19,6 +19,16 @@ export class UsersInMemoryRepository implements UsersRepository {
     return user
   }
 
+  async findById(id: number) {
+    const user = this.items.find((item) => item.id === id)
+
+    if (!user) {
+      return null
+    }
+
+    return user
+  }
+
   async findByEmail(email: string) {
     const user = this.items.find((item) => item.email === email)
 
@@ -31,10 +41,6 @@ export class UsersInMemoryRepository implements UsersRepository {
 
   async update(id: number, data: Partial<User>) {
     const userIndex = this.items.findIndex((item) => item.id === id)
-
-    if (userIndex < 0) {
-      return null
-    }
 
     const user = this.items[userIndex]
 
@@ -49,5 +55,9 @@ export class UsersInMemoryRepository implements UsersRepository {
     return this.items[userIndex]
   }
 
-  // async delete(id: number) {}
+  async delete(id: number) {
+    const userIndex = this.items.findIndex((item) => item.id === id)
+
+    this.items.splice(userIndex, 1)
+  }
 }
