@@ -6,7 +6,7 @@ import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 let postsRepository: PostsInMemoryRepository
 let usersRepository: UsersInMemoryRepository
-let sut: CreatePostUseCase
+let sut: CreatePostUseCase // System Under Test
 
 describe('Create post use case', () => {
   beforeEach(async () => {

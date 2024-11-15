@@ -14,5 +14,5 @@ export interface PostsRepository {
   findById(id: number): Promise<Post | null>
   findManyByUserId(userId: number): Promise<Post[]>
   update(id: number, data: Partial<Post>): Promise<Post>
-  // delete(id: number): Promise<void>
+  delete(id: number): Promise<void>
 }

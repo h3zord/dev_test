@@ -6,7 +6,7 @@ import { FindManyPostsByUserIdUseCase } from './find-many-posts-by-user-id'
 
 let postsRepository: PostsInMemoryRepository
 let usersRepository: UsersInMemoryRepository
-let sut: FindManyPostsByUserIdUseCase
+let sut: FindManyPostsByUserIdUseCase // System Under Test
 
 describe('Find many posts by user id use case', () => {
   beforeEach(async () => {

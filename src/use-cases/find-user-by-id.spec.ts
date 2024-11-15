@@ -4,7 +4,7 @@ import { FindUserByIdUseCase } from './find-user-by-id'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 let usersRepository: UsersInMemoryRepository
-let sut: FindUserByIdUseCase
+let sut: FindUserByIdUseCase // System Under Test
 
 describe('Find user by id use case', () => {
   beforeEach(async () => {

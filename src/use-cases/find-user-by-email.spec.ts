@@ -4,7 +4,7 @@ import { FindUserByEmailUseCase } from './find-user-by-email'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 let usersRepository: UsersInMemoryRepository
-let sut: FindUserByEmailUseCase
+let sut: FindUserByEmailUseCase // System Under Test
 
 describe('Find user by email use case', () => {
   beforeEach(async () => {

@@ -1,18 +1,18 @@
 import { PostsInMemoryRepository } from '../repositories/in-memory/posts-in-memory-repository'
 import { expect, describe, it, beforeEach } from 'vitest'
-import { UpdatePostUseCase } from './update-post'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { DeletePostUseCase } from './delete-post'
 import { UsersInMemoryRepository } from '../repositories/in-memory/users-in-memory-repository'
 
 let postsRepository: PostsInMemoryRepository
 let usersRepository: UsersInMemoryRepository
-let sut: UpdatePostUseCase // System Under Test
+let sut: DeletePostUseCase // System Under Test
 
-describe('Update post use case', () => {
+describe('Delete post use case', () => {
   beforeEach(async () => {
     postsRepository = new PostsInMemoryRepository()
     usersRepository = new UsersInMemoryRepository()
-    sut = new UpdatePostUseCase(postsRepository)
+    sut = new DeletePostUseCase(postsRepository)
 
     await usersRepository.create({
       id: 1,
@@ -27,27 +27,24 @@ describe('Update post use case', () => {
       description: 'Void description',
       userId: 1,
     })
+
+    await postsRepository.create({
+      id: 2,
+      title: 'Void title',
+      description: 'Void description',
+      userId: 1,
+    })
   })
 
-  it('should be able to update a post', async () => {
-    const { post } = await sut.execute({
-      id: 1,
-      title: 'Filled title',
-      description: 'Filled description',
-    })
+  it('should be able to delete an post', async () => {
+    await sut.execute({ id: 1 })
 
-    expect(post.title).toEqual('Filled title')
-    expect(post.description).toEqual('Filled description')
-    expect(post.updatedAt).toEqual(expect.any(Date))
+    expect(postsRepository.items).toHaveLength(1)
   })
 
   it('should throw an error when id is invalid', async () => {
-    await expect(() =>
-      sut.execute({
-        id: 2,
-        title: 'Filled title',
-        description: 'Filled description',
-      }),
-    ).rejects.toBeInstanceOf(ResourceNotFoundError)
+    await expect(() => sut.execute({ id: 3 })).rejects.toBeInstanceOf(
+      ResourceNotFoundError,
+    )
   })
 })

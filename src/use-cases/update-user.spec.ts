@@ -4,7 +4,7 @@ import { UpdateUserUseCase } from './update-user'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 let usersRepository: UsersInMemoryRepository
-let sut: UpdateUserUseCase
+let sut: UpdateUserUseCase // System Under Test
 
 describe('Update user use case', () => {
   beforeEach(async () => {

@@ -6,7 +6,7 @@ import { UsersInMemoryRepository } from '../repositories/in-memory/users-in-memo
 
 let postsRepository: PostsInMemoryRepository
 let usersRepository: UsersInMemoryRepository
-let sut: FindPostByIdUseCase
+let sut: FindPostByIdUseCase // System Under Test
 
 describe('Find post by id use case', () => {
   beforeEach(async () => {

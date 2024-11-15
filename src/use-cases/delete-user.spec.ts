@@ -4,7 +4,7 @@ import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { DeleteUserUseCase } from './delete-user'
 
 let usersRepository: UsersInMemoryRepository
-let sut: DeleteUserUseCase
+let sut: DeleteUserUseCase // System Under Test
 
 describe('Delete user use case', () => {
   beforeEach(async () => {
