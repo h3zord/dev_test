@@ -3,6 +3,7 @@ import { expect, describe, it, beforeEach } from 'vitest'
 import { UpdatePostUseCase } from './update-post'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { UsersInMemoryRepository } from '../repositories/in-memory/users-in-memory-repository'
+import { User } from '../entity/User'
 
 let postsRepository: PostsInMemoryRepository
 let usersRepository: UsersInMemoryRepository
@@ -13,6 +14,9 @@ describe('Update post use case', () => {
     postsRepository = new PostsInMemoryRepository()
     usersRepository = new UsersInMemoryRepository()
     sut = new UpdatePostUseCase(postsRepository)
+
+    const user = new User()
+    user.id = 1
 
     await usersRepository.create({
       id: 1,
@@ -25,7 +29,7 @@ describe('Update post use case', () => {
       id: 1,
       title: 'Void title',
       description: 'Void description',
-      userId: 1,
+      user,
     })
   })
 

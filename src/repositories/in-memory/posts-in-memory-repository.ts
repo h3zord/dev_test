@@ -1,5 +1,4 @@
 import { Post } from '../../entity/Post'
-import { User } from '../../entity/User'
 import {
   CreatePost,
   PostsRepository,
@@ -12,14 +11,11 @@ export class PostsInMemoryRepository implements PostsRepository {
 
   async create(data: CreatePost) {
     const post = new Post()
-    const user = new User()
-
-    user.id = data.userId
 
     post.id = data.id ?? this.currentId++
     post.title = data.title
     post.description = data.description
-    post.user = user
+    post.user = data.user
     post.createdAt = data.createdAt ?? new Date()
 
     this.items.push(post)

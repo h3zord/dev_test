@@ -3,6 +3,7 @@ import { expect, describe, it, beforeEach } from 'vitest'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { DeletePostUseCase } from './delete-post'
 import { UsersInMemoryRepository } from '../repositories/in-memory/users-in-memory-repository'
+import { User } from '../entity/User'
 
 let postsRepository: PostsInMemoryRepository
 let usersRepository: UsersInMemoryRepository
@@ -13,6 +14,9 @@ describe('Delete post use case', () => {
     postsRepository = new PostsInMemoryRepository()
     usersRepository = new UsersInMemoryRepository()
     sut = new DeletePostUseCase(postsRepository)
+
+    const user = new User()
+    user.id = 1
 
     await usersRepository.create({
       id: 1,
@@ -25,14 +29,14 @@ describe('Delete post use case', () => {
       id: 1,
       title: 'Void title',
       description: 'Void description',
-      userId: 1,
+      user,
     })
 
     await postsRepository.create({
       id: 2,
       title: 'Void title',
       description: 'Void description',
-      userId: 1,
+      user,
     })
   })
 
