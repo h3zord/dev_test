@@ -1,10 +1,11 @@
 import { Post } from '../../entity/Post'
+import { User } from '../../entity/User'
 
 export interface CreatePost {
   id?: number
   title: string
   description: string
-  userId: number
+  user: User
   createdAt?: Date
   updatedAt?: Date
 }

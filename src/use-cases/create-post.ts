@@ -33,7 +33,7 @@ export class CreatePostUseCase {
     const newPost = await this.postsRepository.create({
       title,
       description,
-      userId,
+      user,
     })
 
     return {
