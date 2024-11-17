@@ -23,20 +23,20 @@ export const AppDataSource = new DataSource({
   synchronize: true,
 })
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+// const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
-const initializeDatabase = async () => {
-  await wait(1000)
-  try {
-    await AppDataSource.initialize()
-    console.log('Data Source has been initialized!')
-  } catch (err) {
-    console.error('Error during Data Source initialization:', err)
-    process.exit(1)
-  }
-}
+// const initializeDatabase = async () => {
+//   await wait(1000)
+//   try {
+//     await AppDataSource.initialize()
+//     console.log('Data Source has been initialized!')
+//   } catch (err) {
+//     console.error('Error during Data Source initialization:', err)
+//     process.exit(1)
+//   }
+// }
 
-initializeDatabase()
+// initializeDatabase()
 
 // app.post('/users', async (req, res) => {})
 

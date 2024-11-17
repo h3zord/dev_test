@@ -13,11 +13,11 @@ export async function createUser(req: Request, res: Response) {
 
   const createUserUseCase = makeCreateUserUseCase()
 
-  await createUserUseCase.execute({
+  const { user } = await createUserUseCase.execute({
     firstName,
     lastName,
     email,
   })
 
-  return res.status(201).end()
+  return res.status(201).json({ user: { id: user.id } })
 }

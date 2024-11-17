@@ -2,25 +2,13 @@ import request from 'supertest'
 
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { app, AppDataSource } from '../../..'
-import { QueryRunner } from 'typeorm'
-
-let queryRunner: QueryRunner
 
 describe('Create user (e2e)', () => {
   beforeAll(async () => {
     await AppDataSource.initialize()
-
-    queryRunner = AppDataSource.createQueryRunner()
-
-    await queryRunner.startTransaction()
   })
 
   afterAll(async () => {
-    if (queryRunner) {
-      await queryRunner.rollbackTransaction() // Reverte as alterações
-      await queryRunner.release() // Libera o query runner
-    }
-
     await AppDataSource.destroy()
   })
 
@@ -31,6 +19,7 @@ describe('Create user (e2e)', () => {
       email: 'johndoe@example.com',
     })
 
+    expect(response.body.user).toEqual({ id: expect.any(Number) })
     expect(response.statusCode).toEqual(201)
   })
 
