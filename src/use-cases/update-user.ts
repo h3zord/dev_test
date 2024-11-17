@@ -3,9 +3,9 @@ import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface UpdateUserUseCaseRequest {
   id: number
-  firstName?: string
-  lastName?: string
-  email?: string
+  firstName: string
+  lastName: string
+  email: string
 }
 
 interface UpdateUserUseCaseResponse {}

@@ -7,7 +7,7 @@ import { resetDatabase } from '../../../utils/test/reset-database'
 import { QueryRunner } from 'typeorm'
 import { AppDataSource } from '../../../data-source'
 
-describe('Find user by id (e2e)', () => {
+describe('Update user (e2e)', () => {
   let queryRunner: QueryRunner
   let userId: number
 
@@ -31,17 +31,35 @@ describe('Find user by id (e2e)', () => {
     await resetDatabase()
   })
 
-  it('should be able to find a user by id', async () => {
-    const response = await request(app).get(`/users/${userId}`)
+  it('should be able to update a user', async () => {
+    const response = await request(app).put(`/users/${userId}`).send({
+      firstName: 'Ada',
+      lastName: 'Lovelace',
+      email: 'test@test.com',
+    })
 
-    expect(response.statusCode).toEqual(200)
-    expect(response.body.user.id).toEqual(userId)
+    expect(response.statusCode).toEqual(204)
   })
 
-  it('should not be able to find a user with wrong id', async () => {
-    const response = await request(app).get('/users/9999')
+  it('should not be able to update a user with wrong id', async () => {
+    const response = await request(app).put('/users/999').send({
+      firstName: 'Ada',
+      lastName: 'Lovelace',
+      email: 'test@test.com',
+    })
 
     expect(response.statusCode).toEqual(400)
     expect(response.body.message).toEqual('Resource not found')
+  })
+
+  it('should not be able to update a user with invalid informations', async () => {
+    const response = await request(app).put(`/users/${userId}`).send({
+      firstName: '',
+      lastName: '',
+      email: '',
+    })
+
+    expect(response.statusCode).toEqual(400)
+    expect(response.body.message).toEqual('Validation error')
   })
 })

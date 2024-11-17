@@ -24,6 +24,7 @@ describe('Update user use case', () => {
       id: 1,
       firstName: 'Ada',
       lastName: 'Lovelace',
+      email: 'test@test.com',
     })
 
     expect(usersRepository.items[0].firstName).toEqual('Ada')
@@ -33,7 +34,12 @@ describe('Update user use case', () => {
 
   it('should throw an error when id is invalid', async () => {
     await expect(() =>
-      sut.execute({ id: 2, firstName: 'Ada', lastName: 'Lovelace' }),
+      sut.execute({
+        id: 2,
+        firstName: 'Ada',
+        lastName: 'Lovelace',
+        email: 'test@test.com',
+      }),
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })

@@ -1,6 +1,10 @@
-import { CreatePost, PostsRepository } from '../contracts/posts-repository'
 import { Post } from '../../entity/Post'
 import { User } from '../../entity/User'
+import {
+  CreatePost,
+  PostsRepository,
+  UpdatePost,
+} from '../contracts/posts-repository'
 
 export class PostsInMemoryRepository implements PostsRepository {
   public items: Post[] = []
@@ -39,13 +43,11 @@ export class PostsInMemoryRepository implements PostsRepository {
     return posts
   }
 
-  async update(id: number, data: Partial<Post>) {
+  async update(id: number, data: UpdatePost) {
     const postIndex = this.items.findIndex((item) => item.id === id)
 
-    const post = this.items[postIndex]
-
-    this.items[postIndex].title = data.title ?? post.title
-    this.items[postIndex].description = data.description ?? post.description
+    this.items[postIndex].title = data.title
+    this.items[postIndex].description = data.description
     this.items[postIndex].updatedAt = new Date()
   }
 

@@ -1,15 +1,28 @@
 import request from 'supertest'
 
-import { afterAll, beforeAll, describe, expect, it } from 'vitest'
-import { app, AppDataSource } from '../../..'
+import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { app } from '../../..'
+import { resetDatabase } from '../../../utils/test/reset-database'
+import { AppDataSource } from '../../../data-source'
+import { QueryRunner } from 'typeorm'
 
 describe('Create user (e2e)', () => {
-  beforeAll(async () => {
-    await AppDataSource.initialize()
+  let queryRunner: QueryRunner
+
+  beforeEach(async () => {
+    queryRunner = AppDataSource.createQueryRunner()
+
+    await queryRunner.startTransaction()
+  })
+
+  afterEach(async () => {
+    await queryRunner.rollbackTransaction()
+
+    await queryRunner.release()
   })
 
   afterAll(async () => {
-    await AppDataSource.destroy()
+    await resetDatabase()
   })
 
   it('should be able to create a new user', async () => {
@@ -19,8 +32,8 @@ describe('Create user (e2e)', () => {
       email: 'johndoe@example.com',
     })
 
-    expect(response.body.user).toEqual({ id: expect.any(Number) })
     expect(response.statusCode).toEqual(201)
+    expect(response.body.user.id).toEqual(expect.any(Number))
   })
 
   it('should not be able to create a new user with invalid informations', async () => {

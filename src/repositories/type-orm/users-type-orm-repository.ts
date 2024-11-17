@@ -1,7 +1,11 @@
 import { Repository } from 'typeorm'
-import { AppDataSource } from '../..'
 import { User } from '../../entity/User'
-import { CreateUser, UsersRepository } from '../contracts/users-repository'
+import { AppDataSource } from '../../data-source'
+import {
+  CreateUser,
+  UpdateUser,
+  UsersRepository,
+} from '../contracts/users-repository'
 
 export class UsersTypeOrmRepository implements UsersRepository {
   private userRepository: Repository<User>
@@ -34,7 +38,7 @@ export class UsersTypeOrmRepository implements UsersRepository {
     return user
   }
 
-  async update(id: number, data: Partial<User>) {
+  async update(id: number, data: UpdateUser) {
     await this.userRepository.update(id, { ...data })
   }
 

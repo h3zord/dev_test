@@ -1,5 +1,9 @@
-import { CreateUser, UsersRepository } from '../contracts/users-repository'
 import { User } from '../../entity/User'
+import {
+  CreateUser,
+  UpdateUser,
+  UsersRepository,
+} from '../contracts/users-repository'
 
 export class UsersInMemoryRepository implements UsersRepository {
   public items: User[] = []
@@ -39,14 +43,12 @@ export class UsersInMemoryRepository implements UsersRepository {
     return user
   }
 
-  async update(id: number, data: Partial<User>) {
+  async update(id: number, data: UpdateUser) {
     const userIndex = this.items.findIndex((item) => item.id === id)
 
-    const user = this.items[userIndex]
-
-    this.items[userIndex].firstName = data.firstName ?? user.firstName
-    this.items[userIndex].lastName = data.lastName ?? user.lastName
-    this.items[userIndex].email = data.email ?? user.email
+    this.items[userIndex].firstName = data.firstName
+    this.items[userIndex].lastName = data.lastName
+    this.items[userIndex].email = data.email
     this.items[userIndex].updatedAt = new Date()
   }
 
