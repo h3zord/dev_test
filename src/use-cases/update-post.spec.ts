@@ -30,15 +30,15 @@ describe('Update post use case', () => {
   })
 
   it('should be able to update a post', async () => {
-    const { post } = await sut.execute({
+    await sut.execute({
       id: 1,
       title: 'Filled title',
       description: 'Filled description',
     })
 
-    expect(post.title).toEqual('Filled title')
-    expect(post.description).toEqual('Filled description')
-    expect(post.updatedAt).toEqual(expect.any(Date))
+    expect(postsRepository.items[0].title).toEqual('Filled title')
+    expect(postsRepository.items[0].description).toEqual('Filled description')
+    expect(postsRepository.items[0].updatedAt).toEqual(expect.any(Date))
   })
 
   it('should throw an error when id is invalid', async () => {

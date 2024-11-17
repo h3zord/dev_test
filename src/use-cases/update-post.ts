@@ -1,4 +1,3 @@
-import { Post } from '../entity/Post'
 import { PostsRepository } from '../repositories/contracts/posts-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
@@ -8,9 +7,7 @@ interface UpdatePostUseCaseRequest {
   description: string
 }
 
-interface UpdatePostUseCaseResponse {
-  post: Post
-}
+interface UpdatePostUseCaseResponse {}
 
 export class UpdatePostUseCase {
   constructor(private postsRepository: PostsRepository) {}
@@ -26,13 +23,11 @@ export class UpdatePostUseCase {
       throw new ResourceNotFoundError()
     }
 
-    const updatedPost = await this.postsRepository.update(id, {
+    await this.postsRepository.update(id, {
       title,
       description,
     })
 
-    return {
-      post: updatedPost,
-    }
+    return {}
   }
 }

@@ -1,4 +1,3 @@
-import { User } from '../entity/User'
 import { UsersRepository } from '../repositories/contracts/users-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
@@ -9,9 +8,7 @@ interface UpdateUserUseCaseRequest {
   email?: string
 }
 
-interface UpdateUserUseCaseResponse {
-  user: User
-}
+interface UpdateUserUseCaseResponse {}
 
 export class UpdateUserUseCase {
   constructor(private usersRepository: UsersRepository) {}
@@ -28,14 +25,12 @@ export class UpdateUserUseCase {
       throw new ResourceNotFoundError()
     }
 
-    const updatedUser = await this.usersRepository.update(id, {
+    await this.usersRepository.update(id, {
       firstName,
       lastName,
       email,
     })
 
-    return {
-      user: updatedUser,
-    }
+    return {}
   }
 }

@@ -6,13 +6,13 @@ export class UsersInMemoryRepository implements UsersRepository {
   private currentId = 1
 
   async create(data: CreateUser) {
-    const user = {
-      id: data.id ?? this.currentId++,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      createdAt: data.createdAt ?? new Date(),
-    } as User
+    const user = new User()
+
+    user.id = data.id ?? this.currentId
+    user.firstName = data.firstName
+    user.lastName = data.lastName
+    user.email = data.email
+    user.createdAt = data.createdAt ?? new Date()
 
     this.items.push(user)
 
@@ -44,15 +44,10 @@ export class UsersInMemoryRepository implements UsersRepository {
 
     const user = this.items[userIndex]
 
-    this.items[userIndex] = {
-      ...user,
-      firstName: data.firstName ?? user.firstName,
-      lastName: data.lastName ?? user.lastName,
-      email: data.email ?? user.email,
-      updatedAt: new Date(),
-    }
-
-    return this.items[userIndex]
+    this.items[userIndex].firstName = data.firstName ?? user.firstName
+    this.items[userIndex].lastName = data.lastName ?? user.lastName
+    this.items[userIndex].email = data.email ?? user.email
+    this.items[userIndex].updatedAt = new Date()
   }
 
   async delete(id: number) {

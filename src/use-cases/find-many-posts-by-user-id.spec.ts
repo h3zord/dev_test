@@ -38,9 +38,9 @@ describe('Find many posts by user id use case', () => {
   })
 
   it('should be able to find many posts by user id', async () => {
-    const { post } = await sut.execute({ userId: 1 })
+    const { postList } = await sut.execute({ userId: 1 })
 
-    expect(post).toHaveLength(2)
+    expect(postList).toHaveLength(2)
   })
 
   it('should throw an error when user id is invalid', async () => {

@@ -1,13 +1,18 @@
 import 'reflect-metadata'
+import 'express-async-errors'
+
 import express from 'express'
+
 import { DataSource } from 'typeorm'
 import { User } from './entity/User'
 import { Post } from './entity/Post'
+import { userRouters } from './http/controllers/user/routes'
+import { zodErrorsMiddleware } from './http/middlewares/zod-errors'
 
-const app = express()
+export const app = express()
 app.use(express.json())
 
-const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource({
   type: 'mysql',
   host: process.env.DB_HOST || 'localhost',
   port: 3306,
@@ -21,7 +26,7 @@ const AppDataSource = new DataSource({
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const initializeDatabase = async () => {
-  await wait(20000)
+  await wait(1000)
   try {
     await AppDataSource.initialize()
     console.log('Data Source has been initialized!')
@@ -33,9 +38,13 @@ const initializeDatabase = async () => {
 
 initializeDatabase()
 
-app.post('/users', async (req, res) => {})
+// app.post('/users', async (req, res) => {})
 
-app.post('/posts', async (req, res) => {})
+// app.post('/posts', async (req, res) => {})
+
+app.use(userRouters)
+
+app.use(zodErrorsMiddleware)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {

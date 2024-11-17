@@ -20,15 +20,15 @@ describe('Update user use case', () => {
   })
 
   it('should be able to update an user', async () => {
-    const { user } = await sut.execute({
+    await sut.execute({
       id: 1,
       firstName: 'Ada',
       lastName: 'Lovelace',
     })
 
-    expect(user.firstName).toEqual('Ada')
-    expect(user.lastName).toEqual('Lovelace')
-    expect(user.updatedAt).toEqual(expect.any(Date))
+    expect(usersRepository.items[0].firstName).toEqual('Ada')
+    expect(usersRepository.items[0].lastName).toEqual('Lovelace')
+    expect(usersRepository.items[0].updatedAt).toEqual(expect.any(Date))
   })
 
   it('should throw an error when id is invalid', async () => {

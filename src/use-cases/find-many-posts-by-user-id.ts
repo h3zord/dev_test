@@ -8,7 +8,7 @@ interface FindManyPostsByUserIdUseCaseRequest {
 }
 
 interface FindManyPostsByUserIdUseCaseResponse {
-  post: Post[]
+  postList: Post[]
 }
 
 export class FindManyPostsByUserIdUseCase {
@@ -26,10 +26,10 @@ export class FindManyPostsByUserIdUseCase {
       throw new ResourceNotFoundError()
     }
 
-    const post = await this.postsRepository.findManyByUserId(userId)
+    const postList = await this.postsRepository.findManyByUserId(userId)
 
     return {
-      post,
+      postList,
     }
   }
 }

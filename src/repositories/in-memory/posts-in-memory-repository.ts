@@ -1,18 +1,22 @@
 import { CreatePost, PostsRepository } from '../contracts/posts-repository'
 import { Post } from '../../entity/Post'
+import { User } from '../../entity/User'
 
 export class PostsInMemoryRepository implements PostsRepository {
   public items: Post[] = []
   private currentId = 1
 
   async create(data: CreatePost) {
-    const post = {
-      id: data.id ?? this.currentId++,
-      title: data.title,
-      description: data.description,
-      user: { id: data.userId },
-      createdAt: data.createdAt ?? new Date(),
-    } as Post
+    const post = new Post()
+    const user = new User()
+
+    user.id = data.userId
+
+    post.id = data.id ?? this.currentId++
+    post.title = data.title
+    post.description = data.description
+    post.user = user
+    post.createdAt = data.createdAt ?? new Date()
 
     this.items.push(post)
 
@@ -40,14 +44,9 @@ export class PostsInMemoryRepository implements PostsRepository {
 
     const post = this.items[postIndex]
 
-    this.items[postIndex] = {
-      ...post,
-      title: data.title ?? post.title,
-      description: data.description ?? post.description,
-      updatedAt: new Date(),
-    }
-
-    return this.items[postIndex]
+    this.items[postIndex].title = data.title ?? post.title
+    this.items[postIndex].description = data.description ?? post.description
+    this.items[postIndex].updatedAt = new Date()
   }
 
   async delete(id: number) {
