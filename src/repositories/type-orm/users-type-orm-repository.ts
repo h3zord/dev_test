@@ -15,11 +15,11 @@ export class UsersTypeOrmRepository implements UsersRepository {
   }
 
   async create(data: CreateUser) {
-    const newUser = new User()
-
-    newUser.firstName = data.firstName
-    newUser.lastName = data.firstName
-    newUser.email = data.email
+    const newUser = this.userRepository.create({
+      firstName: data.firstName,
+      lastName: data.firstName,
+      email: data.email,
+    })
 
     await this.userRepository.save(newUser)
 

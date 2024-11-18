@@ -15,11 +15,11 @@ export class PostsTypeOrmRepository implements PostsRepository {
   }
 
   async create(data: CreatePost) {
-    const newPost = new Post()
-
-    newPost.title = data.title
-    newPost.description = data.description
-    newPost.user = data.user
+    const newPost = this.postRepository.create({
+      title: data.title,
+      description: data.description,
+      user: data.user,
+    })
 
     await this.postRepository.save(newPost)
 

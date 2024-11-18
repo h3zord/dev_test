@@ -21,7 +21,7 @@ export async function createPost(req: Request, res: Response) {
       userId,
     })
 
-    return res.status(201).json({ post: { id: post.id } })
+    return res.status(201).json({ ...post })
   } catch (error) {
     if (error instanceof ResourceNotFoundError) {
       return res.status(400).json({ message: error.message })

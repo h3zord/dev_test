@@ -19,7 +19,7 @@ export class User {
   @Column({ type: 'varchar', length: 100, nullable: false })
   lastName: string
 
-  @Column({ type: 'varchar', length: 100, nullable: false }) // Aqui o email deveria ser único, mas irei seguir as orientações do readme do teste para a vaga.
+  @Column({ type: 'varchar', length: 100, nullable: false }) // Aqui o email deveria ser único, mas irei seguir as orientações do readme do teste.
   email: string
 
   @CreateDateColumn({ type: 'timestamp' })

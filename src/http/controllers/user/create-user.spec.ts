@@ -33,7 +33,7 @@ describe('Create user (e2e)', () => {
     })
 
     expect(response.statusCode).toEqual(201)
-    expect(response.body.user.id).toEqual(expect.any(Number))
+    expect(response.body.id).toEqual(expect.any(Number))
   })
 
   it('should not be able to create a new user with invalid informations', async () => {

@@ -10,14 +10,21 @@ export interface CreateTestUser {
   updatedAt?: Date
 }
 
+/**
+ * Cria um usuário de teste no banco de dados.
+ *
+ * @param data Dados opcionais para personalizar o usuário.
+ * @returns O objeto do usuário criado.
+ */
+
 export async function createTestUser(data: CreateTestUser = {}) {
-  const newUser = new User()
-
-  newUser.firstName = data.firstName ?? 'John'
-  newUser.lastName = data.lastName ?? 'Doe'
-  newUser.email = data.email ?? 'test@test.com'
-
   const userRepository = AppDataSource.getRepository(User)
+
+  const newUser = userRepository.create({
+    firstName: data.firstName ?? 'John',
+    lastName: data.lastName ?? 'Doe',
+    email: data.email ?? 'test@test.com',
+  })
 
   await userRepository.save(newUser)
 

@@ -19,5 +19,5 @@ export async function createUser(req: Request, res: Response) {
     email,
   })
 
-  return res.status(201).json({ user: { id: user.id } })
+  return res.status(201).json({ ...user })
 }

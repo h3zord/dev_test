@@ -6,20 +6,27 @@ export interface CreateTestPost {
   id?: number
   title?: string
   description?: string
-  post?: Post
   createdAt?: Date
   updatedAt?: Date
 }
 
+/**
+ * Cria um post de teste no banco de dados.
+ *
+ * @param data Dados opcionais para personalizar o post.
+ * @returns O objeto do post criado.
+ */
+
 export async function createTestPost(data: CreateTestPost = {}) {
-  const newPost = new Post()
+  const postRepository = AppDataSource.getRepository(Post)
+
   const user = await createTestUser()
 
-  newPost.title = data.title ?? 'Void title'
-  newPost.description = data.description ?? 'Void description'
-  newPost.user = user
-
-  const postRepository = AppDataSource.getRepository(Post)
+  const newPost = postRepository.create({
+    title: data.title ?? 'Void title',
+    description: data.description ?? 'Void description',
+    user,
+  })
 
   await postRepository.save(newPost)
 

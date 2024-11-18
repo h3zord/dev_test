@@ -39,7 +39,7 @@ describe('Create post (e2e)', () => {
     })
 
     expect(response.statusCode).toEqual(201)
-    expect(response.body.post.id).toEqual(expect.any(Number))
+    expect(response.body.id).toEqual(expect.any(Number))
   })
 
   it('should bot be able to create a new post with wrong userId', async () => {
