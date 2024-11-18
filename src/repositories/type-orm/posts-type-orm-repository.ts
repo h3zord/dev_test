@@ -33,7 +33,7 @@ export class PostsTypeOrmRepository implements PostsRepository {
   }
 
   async findManyByUserId(userId: number) {
-    const postList = await this.postRepository.findBy({ id: userId })
+    const postList = await this.postRepository.findBy({ user: { id: userId } })
 
     return postList
   }
